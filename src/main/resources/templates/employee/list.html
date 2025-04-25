@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Empleados</title>
+</head>
+<body>
+
+<h1>Empleados</h1>
+
+<a th:href="@{/}" style="text-decoration: none;">
+    <button type="button">Regresar al Inicio</button>
+</a>
+
+<form th:action="@{/employees}" method="get">
+    <input type="text" name="search" placeholder="Buscar..." />
+    <button type="submit">Buscar</button>
+    <a th:href="@{/employees/new}">Nuevo Empleado</a>
+</form>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th># de usuario</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Puesto</th>
+        <th>Departamento</th>
+        <th>Ciudad</th>
+        <th>Código Postal</th>
+        <th>Salario</th>
+        <th>Editar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="emp,vEstado  : ${employees}">
+        <td th:text="${vEstado.index+1}">#</td>
+        <td th:text="${emp.firstName}"></td>
+        <td th:text="${emp.lastName}"></td>
+        <td th:text="${emp.job?.jobTitle}"></td>
+        <td th:text="${emp.department?.departmentName}"></td>
+        <td th:text="${emp.location.city}"></td>
+        <td th:text="${emp.location.postalCode}"></td>
+        <td th:text="${emp.salary}"></td>
+        <td>
+            <a th:href="@{/employees/edit/{id}(id=${emp.employeeId})}">Editar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

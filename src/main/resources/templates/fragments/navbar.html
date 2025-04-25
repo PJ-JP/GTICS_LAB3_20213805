@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,9 +7,9 @@
 <body>
 <nav>
     <div style="display: block;">
-        <button><a href=""></a>Empleados</button>
-        <button><a href=""></a>Historial</button>
-        <button><a href=""></a>Reportes</button>
+        <button><a th:href="@{/employees}"></a>Empleados</button>
+        <button><a th:href="@{/employees}"></a>Historial</button>
+        <button><a th:href="@{/employees}"></a>Reportes</button>
     </div>
 </nav>
 </body>
