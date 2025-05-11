@@ -1,51 +1,55 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Lista de Empleados</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragments/navbar.html :: header( title = 'Empleados')}"></head>
+    <body>
+        <main>
+            <div class="container px-4 pb-5">
+                <nav th:replace="~{fragments/navbar.html :: navbar( active = 'Employee')}"></nav>
+                <h1 class="pb-2 border-bottom">Lista de empleados</h1>
+                <div style="display: flex">
+                    <form th:action="@{/employee}" method="get">
+                        <input type="text" name="search" placeholder="Buscar..." />
+                        <label for="filtro">Filtro</label>
+                        <select name="type" id="filtro">
+                            <option value="name">Por nombre</option>
+                            <option value="department">Por departamento</option>
+                        </select>
+                        <button type="submit">Buscar</button>
+                    </form>
+                    <button><a th:href="@{'/employee'}">Limpiar</a></button>
+                </div>
 
-<h1>Empleados</h1>
-
-<a th:href="@{/}" style="text-decoration: none;">
-    <button type="button">Regresar al Inicio</button>
-</a>
-
-<form th:action="@{/employees}" method="get">
-    <input type="text" name="search" placeholder="Buscar..." />
-    <button type="submit">Buscar</button>
-    <a th:href="@{/employees/new}">Nuevo Empleado</a>
-</form>
-
-<table border="1">
-    <thead>
-    <tr>
-        <th># de usuario</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Puesto</th>
-        <th>Departamento</th>
-        <th>Ciudad</th>
-        <th>Código Postal</th>
-        <th>Salario</th>
-        <th>Editar</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="emp,vEstado  : ${employees}">
-        <td th:text="${vEstado.index+1}">#</td>
-        <td th:text="${emp.firstName}"></td>
-        <td th:text="${emp.lastName}"></td>
-        <td th:text="${emp.job?.jobTitle}"></td>
-        <td th:text="${emp.department?.departmentName}"></td>
-        <td th:text="${emp.location.city}"></td>
-        <td th:text="${emp.location.postalCode}"></td>
-        <td th:text="${emp.salary}"></td>
-        <td>
-            <a th:href="@{/employees/edit/{id}(id=${emp.employeeId})}">Editar</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-</body>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Puesto</th>
+                            <th>Departamento</th>
+                            <th>Ciudad</th>
+                            <th>Código postal</th>
+                            <th>Salario</th>
+                            <th>Boton de editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="employee, info : ${listaEmpleados}">
+                            <td th:text="${info.index + 1}"></td>
+                            <td th:text="${employee.firstName}"></td>
+                            <td th:text="${employee.lastName}"></td>
+                            <td th:text="${employee.job.jobTitle}"></td>
+                            <td th:text="${employee.department.departmentName}"></td>
+                            <td th:text="${employee.department.location.city}"></td>
+                            <td th:text="${employee.department.location.postalCode}"></td>
+                            <td th:text="${employee.salary}"></td>
+                            <td><a class="btn btn-primary" th:href="@{'/employee/edit' + '?id=' + ${employee.employeeId}}">Editar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <script th:replace="~{fragments/navbar.html :: footer-bootstrap}"></script>
+    </body>
 </html>

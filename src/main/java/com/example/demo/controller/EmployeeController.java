@@ -1,14 +1,9 @@
 package com.example.demo.controller;
 
 
-/*import com.example.tareaclase3.entity.Employee;
-import com.example.tareaclase3.entity.Department;
-import com.example.tareaclase3.entity.Job;
-import com.example.tareaclase3.repository.EmployeeRepository;
-import com.example.tareaclase3.repository.DepartmentRepository;
-import com.example.tareaclase3.repository.JobRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;*/
+import com.example.demo.entity.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.repository.EmployeeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,34 +11,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/employees")
+@RequestMapping("/employee")
 public class EmployeeController {
 
-    /*@Autowired
+    @Autowired
     private EmployeeRepository employeeRepo;
 
-    @Autowired
-    private DepartmentRepository departmentRepo;
-
-    @Autowired
-    private JobRepository jobRepo;
 
     @GetMapping
-    public String listEmployees(@RequestParam(value = "search", required = false) String search, Model model) {
-        List<Employee> employees = (search == null || search.isEmpty())
-                ? employeeRepo.findAll()
-                : employeeRepo.findBySearch(search.toLowerCase());
-        model.addAttribute("employees", employees);
-        return "employee/list";
-    }
+    public String listEmployees(@RequestParam(value = "search", required = false) String search, @RequestParam(value = "type", required = false) String type,Model model) {
+        List<Employee> employees;
+        if(search == null || search.isEmpty() || (!type.equals("department") && !type.equals("name"))) {
+            employees = employeeRepo.findAll();
+        }
+        else{
+            if(type.equals("department")){
+                employees =employeeRepo.findByDepartment(search.toLowerCase());
+            }
+            else{
+                employees =employeeRepo.findByName(search.toLowerCase());
+            }
+        }
 
-    @GetMapping("/new")
-    public String newEmployee(Model model) {
-        model.addAttribute("employee", new Employee());
-        model.addAttribute("departments", departmentRepo.findAll());
-        model.addAttribute("jobs", jobRepo.findAll());
-        model.addAttribute("managers", employeeRepo.findAll());
-        return "employee/form";
+        model.addAttribute("listaEmpleados", employees);
+        return "employee/list";
     }
 
 
@@ -52,18 +43,14 @@ public class EmployeeController {
     public String editEmployee(@PathVariable("id") int id, Model model) {
         Employee employee = employeeRepo.findById(id).orElse(null);
         model.addAttribute("employee", employee);
-        model.addAttribute("departments", departmentRepo.findAll());
-        model.addAttribute("jobs", jobRepo.findAll());
+        /*model.addAttribute("departments", departmentRepo.findAll());
+        model.addAttribute("jobs", jobRepo.findAll());*/
         model.addAttribute("managers", employeeRepo.findAll());
         return "employee/form";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteEmployee(@PathVariable("id") int id) {
-        employeeRepo.deleteById(id);
-        return "redirect:/employees";
-    }
-    @PostMapping("/save")
+
+    /*@PostMapping("/save")
     public String saveEmployee(@ModelAttribute Employee employee,
                                @RequestParam("job.jobId") String jobId,
                                @RequestParam("department.departmentId") Integer departmentId,
@@ -84,10 +71,7 @@ public class EmployeeController {
 
         employeeRepo.save(employee);
         return "redirect:/employees";
-    }
-
-
-*/
+    }*/
 }
 
 

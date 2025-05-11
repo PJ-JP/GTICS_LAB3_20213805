@@ -3,7 +3,7 @@
 <head th:replace="~{fragments/navbar.html :: header ('LAB3 _ Inicio')}">
 </head>
 <body>
-    <nav th:replace="~{fragments/navbar.html :: navbar}">
+    <nav th:replace="~{fragments/navbar.html :: navbar (active = 'Home')}">
     </nav>
     <h2>Bienvenido al Sistema de Gestión de Empleados</h2>
     <script th:replace="~{fragments/navbar.html :: footer-bootstrap}"></script>

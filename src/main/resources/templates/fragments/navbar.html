@@ -7,7 +7,7 @@
     <title th:text="${title}"></title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4" th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4" th:fragment="navbar (active)">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
@@ -17,15 +17,15 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link"
+                        <a class="nav-link" th:classappend="${active == 'Employee'?'active':''}"
                            th:href="@{/employee}">Empleados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"
+                        <a class="nav-link" th:classappend="${active == 'Historial'?'active':''}"
                            th:href="@{/history}">Historial</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"
+                        <a class="nav-link" th:classappend="${active == 'Reporte'?'active':''}"
                            th:href="@{/report}">Reportes</a>
                     </li>
                 </ul>

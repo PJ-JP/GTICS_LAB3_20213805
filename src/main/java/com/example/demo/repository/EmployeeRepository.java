@@ -12,13 +12,13 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-  /*  @Query("SELECT e FROM Employee e " +
-            "WHERE LOWER(e.firstName) LIKE %:search% " +
-            "OR LOWER(e.lastName) LIKE %:search% " +
-            "OR LOWER(e.job.jobTitle) LIKE %:search% " +
-            "OR LOWER(e.department.departmentName) LIKE %:search% " +
-            "OR LOWER(e.department.location.city) LIKE %:search%")
-    List<Employee> findBySearch(@Param("search") String search);
+  @Query("SELECT e FROM Employee e " +
+            "WHERE CONCAT(LOWER(e.firstName),' ', LOWER(e.lastName)) LIKE %:search%")
+    List<Employee> findByName(@Param("search") String search);
+
+  @Query("SELECT e FROM Employee e " +
+          "WHERE LOWER(e.department.departmentName) LIKE %:search%")
+  List<Employee> findByDepartment(@Param("search") String search);
 
     // Para reporte de empleados con salario > 15000
     @Query("SELECT e FROM Employee e WHERE e.salary > :amount")
@@ -33,16 +33,4 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
         """, nativeQuery = true)
     List<Employee> findExperiencedManagers();
 
-    @Query(value = """
-    SELECT e.first_name as firstName, e.last_name as lastName,
-           jh.start_date as startDate, jh.end_date as endDate,
-           j.job_title as jobTitle
-    FROM employees e
-    JOIN job_history jh ON e.employee_id = jh.employee_id
-    JOIN jobs j ON jh.job_id = j.job_id
-    WHERE e.salary > :salary
-    """, nativeQuery = true)
-    List<JobReportProjection> findWorkHistoryOfEmployeesWithHighSalary(@Param("salary") double salary);
-
-*/
 }
