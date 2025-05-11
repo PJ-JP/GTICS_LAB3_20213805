@@ -1,4 +1,4 @@
-package com.example.tareaclase3.dto;
+package com.example.demo.dto;
 
 public interface ManagerExperienceProjection {
     String getDepartmentName();

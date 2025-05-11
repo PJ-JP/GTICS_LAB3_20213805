@@ -39,39 +39,24 @@ public class EmployeeController {
 
 
 
-    @GetMapping("/edit/{id}")
-    public String editEmployee(@PathVariable("id") int id, Model model) {
+    @GetMapping("/edit")
+    public String editEmployee(@RequestParam(value = "id") int id, Model model) {
         Employee employee = employeeRepo.findById(id).orElse(null);
         model.addAttribute("employee", employee);
-        /*model.addAttribute("departments", departmentRepo.findAll());
-        model.addAttribute("jobs", jobRepo.findAll());*/
-        model.addAttribute("managers", employeeRepo.findAll());
-        return "employee/form";
+        model.addAttribute("cities", employeeRepo.findCities());
+        return "employee/editFrm";
     }
 
 
-    /*@PostMapping("/save")
+    @PostMapping("/save")
     public String saveEmployee(@ModelAttribute Employee employee,
-                               @RequestParam("job.jobId") String jobId,
-                               @RequestParam("department.departmentId") Integer departmentId,
-                               @RequestParam("manager.employeeId") Integer managerId) {
+                               @RequestParam(value = "department_id") int deparment_id,
+                               @RequestParam(value = "location_id") int location_id) {
 
-        // Buscar las entidades en la base de datos
-        if (jobId != null && !jobId.isEmpty()) {
-            employee.setJob(jobRepo.findById(jobId).orElse(null));
-        }
-
-        if (departmentId != null) {
-            employee.setDepartment(departmentRepo.findById(departmentId).orElse(null));
-        }
-
-        if (managerId != null) {
-            employee.setManager(employeeRepo.findById(managerId).orElse(null));
-        }
-
-        employeeRepo.save(employee);
-        return "redirect:/employees";
-    }*/
+        employeeRepo.actualizarParte1(location_id, deparment_id);
+        employeeRepo.actualizarParte2(employee.getDepartment().getLocation().getPostalCode(),location_id);
+        return "redirect:/employee";
+    }
 }
 
 

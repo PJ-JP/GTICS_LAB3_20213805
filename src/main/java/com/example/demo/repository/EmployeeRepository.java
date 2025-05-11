@@ -2,7 +2,9 @@ package com.example.demo.repository;
 
 
 
+import com.example.demo.dto.CityLocate;
 import com.example.demo.entity.Employee;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.query.Param;
@@ -21,16 +23,22 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
   List<Employee> findByDepartment(@Param("search") String search);
 
     // Para reporte de empleados con salario > 15000
-    @Query("SELECT e FROM Employee e WHERE e.salary > :amount")
+  @Query("SELECT e FROM Employee e WHERE e.salary > :amount")
     List<Employee> findEmployeesWithSalaryGreaterThan(@Param("amount") double amount);
 
     // Para reporte de gerentes con experiencia > 5 años
-    @Query(value = """
-        SELECT DISTINCT e.* FROM employees e
-        JOIN job_history jh ON e.employee_id = jh.employee_id
-        WHERE DATEDIFF(CURDATE(), jh.start_date) > 5 * 365
-        AND e.employee_id IN (SELECT manager_id FROM departments)
-        """, nativeQuery = true)
-    List<Employee> findExperiencedManagers();
+  @Query(value = "select location_id,city,street_address from locations;", nativeQuery = true)
+    List<CityLocate> findCities();
+
+  @Transactional
+  @Modifying
+  @Query(value = "UPDATE departments SET location_id= ?1 WHERE department_id= ?2;", nativeQuery = true)
+    void actualizarParte1(int location_id, int department_id);
+
+  @Transactional
+  @Modifying
+  @Query(value = "UPDATE locations SET postal_code = ?1 WHERE location_id= ?2;", nativeQuery = true)
+  void actualizarParte2(String postal_code,int location_id);
+
 
 }

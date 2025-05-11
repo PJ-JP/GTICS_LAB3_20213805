@@ -6,85 +6,46 @@
             <nav th:replace="~{fragments/navbar.html :: navbar( active = 'Employee')}"></nav>
             <div class="row mb-4">
                 <div class="col-md-6 offset-md-3">
-                    <h2 th:text="${employee.id==0? 'Nuevo Empleado':'Editar Empleado'}">Editar Empleado</h2>
+                    <h2>Editar Empleado</h2>
                     <hr/>
                     <form th:action="@{'/employee/save'}" method="post" th:object="${employee}">
-                        <input th:field="*{id}" type="hidden"/>
+                        <input th:field="*{employeeId}" type="hidden"/>
                         <div class="mb-3">
                             <label class="form-label">Nombre</label>
-                            <input type="text" class="form-control" th:field="*{firstname}"/>
+                            <input type="text" class="form-control" th:field="*{firstName}" disabled/>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Apellido</label>
-                            <input type="text" class="form-control" th:field="*{lastname}"/>
+                            <input type="text" class="form-control" th:field="*{lastName}" disabled/>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Título</label>
-                            <input type="text" class="form-control" th:field="*{title}"/>
+                            <label class="form-label">Puesto</label>
+                            <input type="text" class="form-control" th:field="*{job.jobTitle}" disabled/>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Título de cortesía</label>
-                            <input type="text" class="form-control" placeholder="Mr. Ms. Dr. etc"
-                                   th:field="*{titleofcourtesy}"/>
+                            <label class="form-label">Departamento</label>
+                            <input type="text" class="form-control" th:field="*{department.departmentName}" disabled/>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Fecha de nacimiento</label>
-                            <input type="text" class="form-control" name="birthdateStr" placeholder="dd-MM-yyyy"
-                                   th:value="${#dates.format(employee.birthdate, 'dd-MM-yyyy')}"/>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Fecha de ingreso</label>
-                            <input type="text" class="form-control" name="hiredateStr" placeholder="dd-MM-yyyy"
-                                   th:value="${#dates.format(employee.hiredate, 'dd-MM-yyyy')}"/>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Dirección</label>
-                            <input type="text" class="form-control" th:field="*{address}"/>
-                        </div>
+                        <input th:name="department_id" th:value="${employee.department.departmentId}" type="hidden"/>
                         <div class="mb-3">
                             <label class="form-label">Ciudad</label>
-                            <input type="text" class="form-control" th:field="*{city}"/>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Región</label>
-                            <input type="text" class="form-control" th:field="*{region}"/>
+                            <select class="form-select" name="location_id" id="location_id">
+                                <option th:each="city : ${cities}"
+                                        th:selected="${employee.department.location.city == city.city}"
+                                        th:text="|Ciudad: ${city.city} -- Dirección: ${city.streetAddress}|"
+                                        th:value="${city.locationId}"></option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Código postal</label>
-                            <input type="text" class="form-control" th:field="*{postalcode}"/>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Pais</label>
-                            <input type="text" class="form-control" th:field="*{country}"/>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Teléfono</label>
-                            <input type="text" class="form-control" th:field="*{homephone}"/>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Anexo</label>
-                            <input type="text" class="form-control" th:field="*{extension}"/>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Notas</label>
-                            <input type="text" class="form-control" th:field="*{notes}"/>
+                            <input type="text" class="form-control" th:field="*{department.location.postalCode}"/>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Salario</label>
-                            <input type="number" class="form-control" th:field="*{salary}"/>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Jefe</label>
-                            <select class="form-select" name="manager" id="manager">
-                                <option th:each="jefe : ${listaJefes}"
-                                        th:selected="${employee.manager != null and (jefe.id == employee.manager.id)}"
-                                        th:text="|${jefe.firstname} ${jefe.lastname==null?'':jefe.lastname}|"
-                                        th:value="${jefe.id}"></option>
-                            </select>
+                            <input type="text" class="form-control" th:field="*{salary}" disabled/>
                         </div>
                         <a th:href="@{'/employee'}" class="btn btn-danger">Cancelar</a>
-                        <button type="submit" class="btn btn-primary"
-                                th:text="${employee.id==0? 'Guardar':'Actualizar'}">Actualizar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </form>
                 </div>
             </div>
