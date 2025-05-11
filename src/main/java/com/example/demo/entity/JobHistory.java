@@ -11,8 +11,9 @@ import lombok.Setter;
 @Table(name = "job_history")
 public class JobHistory {
 
-    @EmbeddedId
-    private JobHistoryId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer jobHistoryId;
 
 
     private LocalDate startDate;
@@ -30,5 +31,7 @@ public class JobHistory {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
+
+    public JobHistory() {}
 
 }

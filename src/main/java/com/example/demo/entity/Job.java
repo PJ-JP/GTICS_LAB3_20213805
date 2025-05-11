@@ -20,9 +20,6 @@ public class Job {
     private Double minSalary;
     private Double maxSalary;
 
-    //@OneToMany(mappedBy = "job")
-    //private List<Employee> employees;
-
     public Job() {}
 
 

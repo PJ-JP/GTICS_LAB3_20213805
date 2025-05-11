@@ -26,9 +26,6 @@ public class Department {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    //@OneToMany(mappedBy = "department")
-    //private List<Employee> employees;
-
     public Department() {}
 
 }
