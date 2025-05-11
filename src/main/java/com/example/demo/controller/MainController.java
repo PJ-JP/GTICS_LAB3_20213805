@@ -1,4 +1,4 @@
-package com.example.tareaclase3.controller;
+package com.example.demo.controller;
 
 
 import org.springframework.stereotype.Controller;

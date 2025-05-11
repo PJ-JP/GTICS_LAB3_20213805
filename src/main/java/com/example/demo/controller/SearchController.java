@@ -1,7 +1,7 @@
-package com.example.tareaclase3.controller;
+package com.example.demo.controller;
 
-import com.example.tareaclase3.repository.EmployeeRepository;
-import com.example.tareaclase3.repository.DepartmentRepository;
+/*import com.example.tareaclase3.repository.EmployeeRepository;
+import com.example.tareaclase3.repository.DepartmentRepository;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/search")
 public class SearchController {
 
-    @Autowired
+    /*@Autowired
     private EmployeeRepository employeeRepo;
 
     @Autowired
@@ -53,5 +53,5 @@ public class SearchController {
     public String gerentesConExperiencia(Model model) {
         model.addAttribute("lista", departmentRepo.reportExperiencedManagers(5 * 365));
         return "search/ej4_gerentes_experimentados";
-    }
+    }*/
 }

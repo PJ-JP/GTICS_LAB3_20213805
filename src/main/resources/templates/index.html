@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>LAB3 - Inicio</title>
+<head th:replace="~{fragments/navbar.html :: header ('LAB3 _ Inicio')}">
 </head>
 <body>
-<h1>Bienvenido al Sistema de Gestión de Empleados</h1>
-
-<nav>
-    <ul>
-        <li><a th:href="@{/employees}">Empleados</a></li>
-        <li><a th:href="@{/history}">Historial</a></li>
-        <li><a th:href="@{/search}">Reportes</a></li>
-    </ul>
-</nav>
+    <nav th:replace="~{fragments/navbar.html :: navbar}">
+    </nav>
+    <h2>Bienvenido al Sistema de Gestión de Empleados</h2>
+    <script th:replace="~{fragments/navbar.html :: footer-bootstrap}"></script>
 </body>
 </html>
 

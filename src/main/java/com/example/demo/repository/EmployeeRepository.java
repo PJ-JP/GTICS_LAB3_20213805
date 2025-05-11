@@ -1,8 +1,8 @@
-package com.example.tareaclase3.repository;
+package com.example.demo.repository;
 
 
-import com.example.tareaclase3.dto.JobReportProjection;
-import com.example.tareaclase3.entity.Employee;
+
+import com.example.demo.entity.Employee;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.query.Param;
@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-    @Query("SELECT e FROM Employee e " +
+  /*  @Query("SELECT e FROM Employee e " +
             "WHERE LOWER(e.firstName) LIKE %:search% " +
             "OR LOWER(e.lastName) LIKE %:search% " +
             "OR LOWER(e.job.jobTitle) LIKE %:search% " +
@@ -44,5 +44,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     """, nativeQuery = true)
     List<JobReportProjection> findWorkHistoryOfEmployeesWithHighSalary(@Param("salary") double salary);
 
-
+*/
 }

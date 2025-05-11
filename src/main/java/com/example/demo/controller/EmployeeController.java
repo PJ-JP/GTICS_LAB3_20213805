@@ -1,14 +1,14 @@
-package com.example.tareaclase3.controller;
+package com.example.demo.controller;
 
 
-import com.example.tareaclase3.entity.Employee;
+/*import com.example.tareaclase3.entity.Employee;
 import com.example.tareaclase3.entity.Department;
 import com.example.tareaclase3.entity.Job;
 import com.example.tareaclase3.repository.EmployeeRepository;
 import com.example.tareaclase3.repository.DepartmentRepository;
 import com.example.tareaclase3.repository.JobRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;*/
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    @Autowired
+    /*@Autowired
     private EmployeeRepository employeeRepo;
 
     @Autowired
@@ -87,7 +87,7 @@ public class EmployeeController {
     }
 
 
-
+*/
 }
 
 

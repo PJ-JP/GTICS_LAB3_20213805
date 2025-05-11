@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.repository.JobHistoryRepository;
 import com.example.demo.entity.JobHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/history")
 public class HistoryController {
-
+/*
     @Autowired
     private JobHistoryRepository historyRepo;
 
@@ -34,7 +33,7 @@ public class HistoryController {
         }
         model.addAttribute("history", history);
         return "history/list";
-    }
+    }*/
 }
 
 /*

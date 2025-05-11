@@ -21,7 +21,6 @@ public class JobHistory {
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    @MapsId("employee_id")
     private Employee employee;
 
     @ManyToOne
