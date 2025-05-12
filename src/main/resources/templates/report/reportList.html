@@ -17,19 +17,19 @@
     <table class="table">
       <thead>
       <tr>
-        <th>#</th>
         <th>Nombre</th>
         <th>Salario más alto</th>
         <th>Salario más bajo</th>
+        <th>Salario</th>
         <th>Salario promedio por puesto de trabajo</th>
         <th>Persona de salario más alto</th>
       </tr>
       </thead>
       <tbody>
       <tr th:each="employee : ${report}">
-        <td th:text="|${employee.empleado} ${employee.jobId}|"></td>
-        <td th:text="|${employee.minSalary}|"></td>
+        <td th:text="|${employee.empleado} -- JOB_ID: ${employee.jobId}|"></td>
         <td th:text="|${employee.maxSalary}|"></td>
+        <td th:text="|${employee.minSalary}|"></td>
         <td th:text="|${employee.salary}|"></td>
         <td th:text="|${employee.promedio}|"></td>
         <td th:text="|${employee.nombre}|"></td>
